@@ -1,0 +1,42 @@
+{
+  "name": "alaska-admin",
+  "version": "0.0.1",
+  "description": "Alaska admin service",
+  "main": "index.js",
+  "scripts": {
+    "scripts": "babel ./src --out-dir ./lib",
+    "watch": "babel ./src --out-dir ./lib -w",
+    "prebuild": "rimraf lib",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maichong/alaska-admin.git"
+  },
+  "keywords": [
+    "alaska",
+    "admin"
+  ],
+  "author": {
+    "email": "liang@maichong.it",
+    "name": "liang",
+    "url": "https://github.com/liangxingchen"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/maichong/alaska-admin/issues"
+  },
+  "homepage": "https://github.com/maichong/alaska-admin#readme",
+  "devDependencies": {
+    "babel-plugin-syntax-async-functions": "^6.3.13",
+    "babel-plugin-syntax-class-properties": "^6.3.13",
+    "babel-plugin-transform-class-properties": "^6.4.0",
+    "babel-plugin-transform-es2015-destructuring": "^6.4.0",
+    "babel-plugin-transform-es2015-parameters": "^6.4.5",
+    "babel-plugin-transform-object-rest-spread": "^6.3.13",
+    "rimraf": "^2.5.1"
+  },
+  "peerDependencies": {
+    "alaska": "*"
+  }
+}
