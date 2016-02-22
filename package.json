@@ -2,9 +2,9 @@
   "name": "alaska-admin",
   "version": "0.0.1",
   "description": "Alaska admin service",
-  "main": "index.js",
+  "main": "lib/alaska-admin.js",
   "scripts": {
-    "scripts": "babel ./src --out-dir ./lib",
+    "build": "babel ./src --out-dir ./lib",
     "watch": "babel ./src --out-dir ./lib -w",
     "prebuild": "rimraf lib",
     "prepublish": "npm run build"
