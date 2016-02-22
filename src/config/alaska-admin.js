@@ -4,4 +4,8 @@
  * @author Liang <liang@maichong.it>
  */
 
-export default {};
+export default {
+  services: [
+    {id: 'alaska-user', alias: 'user'}
+  ]
+};
