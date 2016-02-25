@@ -5,7 +5,9 @@
  */
 
 export default {
+  statics: process.cwd() + '/runtime/alaska-admin-view/build',
+  templates: '../templates',
   services: [
-    {id: 'alaska-user', alias: 'user'}
+    { id: 'alaska-user', alias: 'user' }
   ]
 };
