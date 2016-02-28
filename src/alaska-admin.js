@@ -14,4 +14,3 @@ export default class AdminService extends alaska.Service {
     super(options, alaska);
   }
 }
-

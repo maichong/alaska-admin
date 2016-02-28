@@ -4,11 +4,10 @@
  * @author Liang <liang@maichong.it>
  */
 
-'use strict';
-
 export async function index(ctx) {
   if (!ctx.path.endsWith('/') == '/' && ctx.path.lastIndexOf('/') < 1) {
     return ctx.redirect(ctx.path + '/');
   }
+  console.log('show index.swig');
   await ctx.show('index.swig');
 }

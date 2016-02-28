@@ -3,6 +3,9 @@
   "env": {
     "node": true
   },
+  "globals": {
+    "__service": true
+  },
   "parser": "babel-eslint",
   "rules": {
     "prefer-const": 0,
