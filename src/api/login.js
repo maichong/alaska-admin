@@ -11,7 +11,35 @@ export async function login(ctx) {
   let username = ctx.request.body.username || service.error('Username is required!');
   let password = ctx.request.body.password || service.error('Password is required!');
   let user = await userService.login(ctx, username, password);
+  let access = await user.hasAbility('admin');
+  let settings = {};
+  if (access) {
+    settings = await service.getSettings();
+  }
   ctx.body = {
-    user: user.id
+    user: user.data(),
+    access,
+    settings
+  };
+}
+
+export async function info(ctx) {
+  let user = ctx.user;
+
+  if (!user) {
+    ctx.body = {
+      logined: false
+    };
+    return;
+  }
+  let access = await user.hasAbility('admin');
+  let settings = {};
+  if (access) {
+    settings = await service.getSettings();
+  }
+  ctx.body = {
+    user: user.data(),
+    access,
+    settings
   };
 }
