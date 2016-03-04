@@ -7,7 +7,13 @@
 const service = __service;
 
 export default class AdminMenu extends service.Model {
+
+  static label = '管理菜单';
+  static title = 'label';
+  static defaultColumns = 'icon,label,type,sort,link,ability';
+
   static fields = {
+    _id: String,
     label: {
       label: '标题',
       type: String,
@@ -42,6 +48,11 @@ export default class AdminMenu extends service.Model {
       depends: {
         type: 'group'
       }
+    },
+    sort: {
+      label: '排序',
+      type: Number,
+      default: 0
     }
   };
 }
