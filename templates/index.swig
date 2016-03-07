@@ -18,15 +18,17 @@
       font-size: 16px;
     }
   </style>
+  <link href="static/fonts/material-icons.css" rel="stylesheet">
 </head>
 <body>
 <div id="app">
   <div class="boot-loading">Loading...</div>
 </div>
+
 {% if env=='production' %}
-  <script type="application/javascript" src="app.min.js"></script>
+  <script type="application/javascript" src="js/app.min.js"></script>
 {% else %}
-  <script type="application/javascript" src="app.js"></script>
+  <script type="application/javascript" src="js/app.js"></script>
 {% endif %}
 </body>
 </html>

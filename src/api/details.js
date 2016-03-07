@@ -1,6 +1,6 @@
 /**
  * @copyright Maichong Software Ltd. 2016 http://maichong.it
- * @date 2016-03-04
+ * @date 2016-03-07
  * @author Liang <liang@maichong.it>
  */
 
@@ -10,7 +10,8 @@ export default async function list(ctx, next) {
   await ctx.checkAbility('admin');
   let serviceId = ctx.query.service;
   let modelName = ctx.query.model;
-  if (!serviceId || !modelName) {
+  let id = ctx.query.id;
+  if (!serviceId || !modelName || !id) {
     alaska.error('Invalid parameters');
   }
   let ability = `admin.${serviceId}.${modelName}.read`.toLowerCase();
@@ -24,15 +25,9 @@ export default async function list(ctx, next) {
     alaska.error('Invalid parameters');
   }
 
-  //TODO filters
-  let filters = ctx.query.filters || {};
-
-  let results = await Model.paginate({
-    page: parseInt(ctx.query.page) || 1,
-    perPage: parseInt(ctx.query.perPage) || 20,
-    search: (ctx.query.search || '').trim(),
-    filters
-  });
-
-  ctx.body = results;
+  let record = await Model.findById(id);
+  if (!record) {
+    alaska.error('Record not found');
+  }
+  ctx.body = record;
 }

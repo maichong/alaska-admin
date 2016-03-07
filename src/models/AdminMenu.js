@@ -12,6 +12,11 @@ export default class AdminMenu extends service.Model {
   static title = 'label';
   static defaultColumns = 'icon,label,type,sort,link,ability';
 
+  static groups = {
+    _: '基础',
+    action: '操作'
+  };
+
   static fields = {
     _id: String,
     label: {
@@ -32,7 +37,8 @@ export default class AdminMenu extends service.Model {
     ability: {
       label: '权限',
       type: String,
-      default: ''
+      default: '',
+      fullWidth: true
     },
     link: {
       label: '链接',
@@ -40,19 +46,22 @@ export default class AdminMenu extends service.Model {
       default: '',
       depends: {
         type: 'link'
-      }
+      },
+      fullWidth: true
     },
     subs: {
       label: '子菜单',
       type: ['AdminMenu'],
       depends: {
         type: 'group'
-      }
+      },
+      fullWidth: true
     },
     sort: {
       label: '排序',
       type: Number,
-      default: 0
+      default: 0,
+      group: 'action'
     }
   };
 }

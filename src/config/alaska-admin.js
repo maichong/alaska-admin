@@ -4,8 +4,16 @@
  * @author Liang <liang@maichong.it>
  */
 
+import {join} from 'path';
+
 export default {
-  statics: process.cwd() + '/runtime/alaska-admin-view/build',
+  statics: [{
+    root: process.cwd() + '/runtime/alaska-admin-view/build',
+    prefix: '/js'
+  }, {
+    root: join(__dirname, '../../static'),
+    prefix: '/static'
+  }],
   templates: '../templates',
   services: [
     { id: 'alaska-user', alias: 'user' }
