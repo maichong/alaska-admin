@@ -7,6 +7,7 @@
 import {join} from 'path';
 
 export default {
+  prefix: '/admin',
   statics: [{
     root: process.cwd() + '/runtime/alaska-admin-view/build',
     prefix: '/js'
