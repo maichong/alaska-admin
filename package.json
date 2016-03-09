@@ -40,6 +40,5 @@
     "alaska": "*"
   },
   "dependencies": {
-    "alaska-admin-view": "*"
   }
 }
