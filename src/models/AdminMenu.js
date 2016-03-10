@@ -13,8 +13,7 @@ export default class AdminMenu extends service.Model {
   static defaultColumns = 'icon,label,type,sort,link,ability';
 
   static groups = {
-    _: '基础',
-    action: '操作'
+    test: '测试'
   };
 
   static fields = {
@@ -31,8 +30,15 @@ export default class AdminMenu extends service.Model {
     },
     type: {
       label: '类型',
-      type: String,
-      default: 'link'
+      type: 'select',
+      default: 'link',
+      options: [{
+        label: '链接',
+        value: 'link'
+      }, {
+        label: '组',
+        value: 'group'
+      }]
     },
     ability: {
       label: '权限',
@@ -60,8 +66,11 @@ export default class AdminMenu extends service.Model {
     sort: {
       label: '排序',
       type: Number,
-      default: 0,
-      group: 'action'
+      default: 0
+    },
+    activated: {
+      label: '激活',
+      type: Boolean
     }
   };
 }

@@ -72,7 +72,8 @@ export default class AdminService extends alaska.Service {
           label: Model.label,
           type: 'link',
           link: `/list/${service.id}/${Model.name}`,
-          ability: ability + 'read'
+          ability: ability + 'read',
+          activated: true
         })).save();
       }
     }
@@ -185,7 +186,7 @@ export default class AdminService extends alaska.Service {
 
     let AdminMenu = this.model('AdminMenu');
     let menu = [];
-    let menuMap = _.reduce(await AdminMenu.find().sort('-sort'), (res, item) => {
+    let menuMap = _.reduce(await AdminMenu.find({ activated: true }).sort('-sort'), (res, item) => {
       item = item.data();
       if (!item.ability || abilities[item.ability] || isSuperUser) {
         delete item.ability;
