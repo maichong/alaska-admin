@@ -10,7 +10,7 @@ export default class AdminMenu extends service.Model {
 
   static label = '管理菜单';
   static title = 'label';
-  static defaultColumns = 'icon,label,type,sort,link,ability';
+  static defaultColumns = 'icon,label,type,sort,link,ability,activated';
 
   static groups = {
     test: '测试'
@@ -21,7 +21,7 @@ export default class AdminMenu extends service.Model {
     label: {
       label: '标题',
       type: String,
-      require: true
+      required: true
     },
     icon: {
       label: '图标',
