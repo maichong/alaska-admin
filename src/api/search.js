@@ -1,19 +1,22 @@
 /**
  * @copyright Maichong Software Ltd. 2016 http://maichong.it
- * @date 2016-03-08
+ * @date 2016-03-11
  * @author Liang <liang@maichong.it>
  */
+
+'use strict';
 
 const service = __service;
 const alaska = service.alaska;
 const _ = require('lodash');
 
-export async function index(ctx, next) {
+export default async function (ctx, next) {
   await ctx.checkAbility('admin');
   let serviceId = ctx.query.service;
   let modelName = ctx.query.model;
   let keyword = ctx.query.search || '';
   let page = parseInt(ctx.query.page) || 1;
+  let prePage = parseInt(ctx.query.prePage) || 100;
 
   if (!serviceId || !modelName) {
     alaska.error('Invalid parameters');
@@ -33,23 +36,22 @@ export async function index(ctx, next) {
 
   let titleField = Model.title || 'title';
 
+  //TODO 搜索
   let results = await Model.paginate({
-    page
+    page,
+    prePage
   }).select(titleField);
 
   ctx.body = {
     service: serviceId,
     model: modelName,
-    pagination: {
-      more: !!results.next
-    },
+    next: results.next,
+    total: results.total,
     results: _.map(results.results, record => {
       let tmp = {
-        id: record.id
+        _id: record.id
       };
-
-      tmp.text = record[titleField] || tmp.id;
-
+      tmp.title = record[titleField] || tmp.id;
       return tmp;
     })
   };
