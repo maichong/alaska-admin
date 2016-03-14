@@ -26,7 +26,6 @@ export async function login(ctx) {
 
 export async function info(ctx) {
   let user = ctx.user;
-
   if (!user) {
     ctx.body = {
       signed: false

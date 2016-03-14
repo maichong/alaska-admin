@@ -16,7 +16,7 @@ export default async function (ctx, next) {
   let modelName = ctx.query.model;
   let keyword = ctx.query.search || '';
   let page = parseInt(ctx.query.page) || 1;
-  let prePage = parseInt(ctx.query.prePage) || 100;
+  let perPage = parseInt(ctx.query.perPage) || 100;
 
   if (!serviceId || !modelName) {
     alaska.error('Invalid parameters');
@@ -39,7 +39,7 @@ export default async function (ctx, next) {
   //TODO 搜索
   let results = await Model.paginate({
     page,
-    prePage
+    perPage
   }).select(titleField);
 
   ctx.body = {
