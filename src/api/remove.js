@@ -1,25 +1,21 @@
 /**
  * @copyright Maichong Software Ltd. 2016 http://maichong.it
- * @date 2016-03-11
+ * @date 2016-03-14
  * @author Liang <liang@maichong.it>
  */
 
 import alaska from 'alaska';
 
-export default async function (ctx, next) {
+export default async function remove(ctx, next) {
   await ctx.checkAbility('admin');
   let serviceId = ctx.query.service;
   let modelName = ctx.query.model;
   let id = ctx.request.body.id;
+
   if (!serviceId || !modelName) {
     alaska.error('Invalid parameters');
   }
-  let ability = `admin.${serviceId}.${modelName}.`.toLowerCase();
-  if (id) {
-    ability += 'update';
-  } else {
-    ability += 'create';
-  }
+  let ability = `admin.${serviceId}.${modelName}.remove`.toLowerCase();
   await ctx.checkAbility(ability);
   let service = ctx.alaska._services[serviceId];
   if (!service) {
@@ -30,18 +26,12 @@ export default async function (ctx, next) {
     alaska.error('Invalid parameters');
   }
 
-  let record;
-  if (id) {
-    record = await Model.findById(id);
-    if (!record) {
-      alaska.error('Record not found');
-    }
-  } else {
-    record = new Model();
+  let record = await Model.findById(id);
+  if (!record) {
+    alaska.error('Record not found');
   }
-  record.set(ctx.request.body);
 
-  await alaska.try(record.save());
+  await alaska.try(record.remove());
 
   ctx.body = record;
 }

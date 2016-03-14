@@ -143,10 +143,9 @@ export default class AdminService extends alaska.Service {
         }
         if (!model.fields._id) {
           model.fields._id = {
-            cell: 'TextFieldCell',
             label: 'ID',
             path: '_id',
-            view: 'TextFieldView'
+            cell: 'TextFieldCell'
           };
         }
         settings.models[Model.name] = model;
@@ -191,25 +190,25 @@ export default class AdminService extends alaska.Service {
       if (!item.ability || abilities[item.ability] || isSuperUser) {
         delete item.ability;
         res[item.id] = item;
-        menu.push(res[item.id]);
+        menu.push(item);
       }
       return res;
     }, {});
 
-    _.each(menu, item => {
-      if (item.subs) {
-        item.subs = _.reduce(item.subs, ((res, subId) => {
-          menuMap[subId].isSub = true;
-          res.push(menuMap[subId]);
-          return res;
-        }), []);
+    _.each(menuMap, item => {
+      if (item.parent && menuMap[item.parent]) {
+        if (!menuMap[item.parent].subs) {
+          menuMap[item.parent].subs = [];
+        }
+        item.isSub = true;
+        menuMap[item.parent].subs.push(item);
       }
     });
 
     return {
       services,
       abilities,
-      menu: _.filter(menu, map => !map.isSub)
+      menu: _.filter(menu, item => !item.isSub)
     };
   }
 

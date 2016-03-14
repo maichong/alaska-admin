@@ -12,6 +12,10 @@ export default class AdminMenu extends service.Model {
   static title = 'label';
   static defaultColumns = 'icon,label,type,sort,link,ability,activated';
 
+  //static nocreate = true;
+  //static noremove = true;
+  //static hidden = true;
+
   static groups = {
     test: '测试'
   };
@@ -55,13 +59,10 @@ export default class AdminMenu extends service.Model {
       },
       fullWidth: true
     },
-    subs: {
-      label: '子菜单',
-      type: ['AdminMenu'],
-      depends: {
-        type: 'group'
-      },
-      fullWidth: true
+    parent: {
+      label: '父菜单',
+      type: 'relationship',
+      ref: 'AdminMenu'
     },
     sort: {
       label: '排序',
@@ -73,4 +74,10 @@ export default class AdminMenu extends service.Model {
       type: Boolean
     }
   };
+
+  async preSave() {
+    if (this.parent && this.parent == this._id) {
+      throw new Error('父菜单不能为自己');
+    }
+  }
 }
