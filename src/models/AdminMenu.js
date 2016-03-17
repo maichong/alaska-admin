@@ -11,14 +11,7 @@ export default class AdminMenu extends service.Model {
   static label = '管理菜单';
   static title = 'label';
   static defaultColumns = 'icon,label,type,sort,link,ability,activated';
-
-  //static nocreate = true;
-  //static noremove = true;
-  //static hidden = true;
-
-  static groups = {
-    test: '测试'
-  };
+  static noremove = true;
 
   static fields = {
     _id: String,

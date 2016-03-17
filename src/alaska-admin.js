@@ -6,8 +6,10 @@
 
 import alaska from 'alaska';
 import * as _ from 'lodash';
-import asyncBusboy from 'async-busboy';
 
+/**
+ * @class AdminService
+ */
 export default class AdminService extends alaska.Service {
   constructor(options, alaska) {
     options = options || {};
@@ -81,9 +83,9 @@ export default class AdminService extends alaska.Service {
   }
 
   /**
-   * 获取管理平台前台配置
-   * @param user
-   * @returns {{}}
+   * [async] 获取管理平台前台配置
+   * @param {User} user
+   * @returns {object}
    */
   async getSettings(user) {
 
@@ -213,7 +215,11 @@ export default class AdminService extends alaska.Service {
     };
   }
 
-
+  /**
+   * [async] 注册管理员后台菜单
+   * @param {object} data
+   * @returns {AdminMenu}
+   */
   async registerMenu(data) {
     let AdminMenu = this.model('AdminMenu');
     let record = AdminMenu.getCache(data.id);

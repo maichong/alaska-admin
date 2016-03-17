@@ -36,7 +36,7 @@ export default async function (ctx, next) {
 
   let titleField = Model.title || 'title';
 
-  //TODO 搜索
+  //TODO filters
   let results = await Model.paginate({
     page,
     perPage

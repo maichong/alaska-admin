@@ -32,6 +32,7 @@ export async function info(ctx) {
     };
     return;
   }
+  ctx.session.lastAlive = Date.now();
   let access = await user.hasAbility('admin');
   let settings = {};
   if (access) {

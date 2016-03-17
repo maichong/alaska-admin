@@ -4,7 +4,7 @@
  * @author Liang <liang@maichong.it>
  */
 
-import {join} from 'path';
+import { join } from 'path';
 
 export default {
   prefix: '/admin',

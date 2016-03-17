@@ -7,33 +7,52 @@
 import alaska from 'alaska';
 
 export default async function (ctx, next) {
-  await ctx.checkAbility('admin');
-  let serviceId = ctx.query.service;
-  let modelName = ctx.query.model;
-  let id = ctx.request.body.id;
-  let path = ctx.request.body.path;
-  if (!serviceId || !modelName || !path) {
-    alaska.error('Invalid parameters');
-  }
-  let ability = `admin.${serviceId}.${modelName}.`.toLowerCase();
-  if (id) {
-    ability += 'update';
-  } else {
-    ability += 'create';
-  }
-  await ctx.checkAbility(ability);
-  let service = ctx.alaska._services[serviceId];
-  if (!service) {
-    alaska.error('Invalid parameters');
-  }
-  let Model = service.model(modelName);
-  if (!Model || !Model.fields[path]) {
-    alaska.error('Invalid parameters');
-  }
+  try {
+    await ctx.checkAbility('admin');
+    let serviceId = ctx.query.service;
+    let modelName = ctx.query.model;
+    let id = ctx.request.body.id;
+    let path = ctx.request.body.path;
+    if (!serviceId || !modelName || !path) {
+      alaska.error('Invalid parameters');
+    }
+    let ability = `admin.${serviceId}.${modelName}.`.toLowerCase();
+    if (id) {
+      ability += 'update';
+    } else {
+      ability += 'create';
+    }
+    await ctx.checkAbility(ability);
+    let service = ctx.alaska._services[serviceId];
+    if (!service) {
+      alaska.error('Invalid parameters');
+    }
+    let Model = service.model(modelName);
+    if (!Model || !Model.fields[path]) {
+      alaska.error('Invalid parameters');
+    }
 
-  let FieldType = Model.fields[path].type;
-  if (!FieldType || !FieldType.upload) {
-    alaska.error('Invalid field');
+    let FieldType = Model.fields[path].type;
+    if (!FieldType || !FieldType.upload) {
+      alaska.error('Invalid field');
+    }
+    let img = await FieldType.upload(ctx.files.file, Model.fields[path], Model);
+    if (ctx.query.editor) {
+      ctx.body = {
+        success: true,
+        file_path: img.url
+      };
+    } else {
+      ctx.body = img;
+    }
+  } catch (error) {
+    if (ctx.query.editor) {
+      ctx.body = {
+        success: false,
+        msg: error.message
+      };
+    } else {
+      throw error;
+    }
   }
-  ctx.body = await FieldType.upload(ctx.files.file, Model.fields[path], Model);
 }

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>Alaska</title>
+  <title>Alaska admin dashboard</title>
   <meta name="renderer" content="webkit">
   <style>
     html, body {

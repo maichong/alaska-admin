@@ -1,6 +1,6 @@
 {
   "name": "alaska-admin",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Alaska admin service",
   "main": "lib/alaska-admin.js",
   "scripts": {
@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/maichong/alaska-admin#readme",
   "devDependencies": {
+    "alaska-admin-view": "^0.1.0",
     "babel-plugin-syntax-async-functions": "^6.3.13",
     "babel-plugin-syntax-class-properties": "^6.3.13",
     "babel-plugin-transform-class-properties": "^6.4.0",
