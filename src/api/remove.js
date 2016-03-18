@@ -17,14 +17,11 @@ export default async function remove(ctx, next) {
   }
   let ability = `admin.${serviceId}.${modelName}.remove`.toLowerCase();
   await ctx.checkAbility(ability);
-  let service = ctx.alaska._services[serviceId];
+  let service = ctx.alaska.services[serviceId];
   if (!service) {
     alaska.error('Invalid parameters');
   }
   let Model = service.model(modelName);
-  if (!Model) {
-    alaska.error('Invalid parameters');
-  }
 
   let record = await Model.findById(id);
   if (!record) {

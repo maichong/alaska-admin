@@ -14,7 +14,7 @@ export async function login(ctx) {
   let access = await user.hasAbility('admin');
   let settings = {};
   if (access) {
-    settings = await service.getSettings(user);
+    settings = await service.settings(user);
   }
   ctx.body = {
     signed: true,
@@ -22,6 +22,11 @@ export async function login(ctx) {
     access,
     settings
   };
+}
+
+export async function logout(ctx) {
+  await userService.logout(ctx);
+  ctx.body = {};
 }
 
 export async function info(ctx) {
@@ -36,7 +41,7 @@ export async function info(ctx) {
   let access = await user.hasAbility('admin');
   let settings = {};
   if (access) {
-    settings = await service.getSettings(user);
+    settings = await service.settings(user);
   }
   ctx.body = {
     signed: true,

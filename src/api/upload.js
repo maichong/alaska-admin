@@ -23,14 +23,11 @@ export default async function (ctx, next) {
       ability += 'create';
     }
     await ctx.checkAbility(ability);
-    let service = ctx.alaska._services[serviceId];
+    let service = ctx.alaska.services[serviceId];
     if (!service) {
       alaska.error('Invalid parameters');
     }
     let Model = service.model(modelName);
-    if (!Model || !Model.fields[path]) {
-      alaska.error('Invalid parameters');
-    }
 
     let FieldType = Model.fields[path].type;
     if (!FieldType || !FieldType.upload) {

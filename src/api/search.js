@@ -25,14 +25,11 @@ export default async function (ctx, next) {
   let ability = `admin.${serviceId}.${modelName}.read`.toLowerCase();
   await ctx.checkAbility(ability);
 
-  let s = alaska._services[serviceId];
+  let s = alaska.services[serviceId];
   if (!s) {
     alaska.error('Invalid parameters');
   }
   let Model = s.model(modelName);
-  if (!Model) {
-    alaska.error('Invalid parameters');
-  }
 
   let titleField = Model.title || 'title';
 

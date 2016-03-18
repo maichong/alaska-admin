@@ -51,10 +51,10 @@ export default class AdminService extends alaska.Service {
       return res;
     }, {});
 
-    for (let serviceId in alaska._services) {
-      let service = alaska._services[serviceId];
-      for (let modelName in service._models) {
-        let Model = service._models[modelName];
+    for (let serviceId in alaska.services) {
+      let service = alaska.services[serviceId];
+      for (let modelName in service.models) {
+        let Model = service.models[modelName];
         let ability = `admin.${service.id}.${Model.name}.`.toLowerCase();
         ['read', 'create', 'remove', 'update'].forEach(action => {
           userService.registerAbility({
@@ -87,22 +87,22 @@ export default class AdminService extends alaska.Service {
    * @param {User} user
    * @returns {object}
    */
-  async getSettings(user) {
+  async settings(user) {
 
     let alaska = this.alaska;
 
     let services = {};
 
-    for (let serviceId in alaska._services) {
-      let service = alaska._services[serviceId];
+    for (let serviceId in alaska.services) {
+      let service = alaska.services[serviceId];
       let settings = {};
       settings.id = serviceId;
       settings.domain = service.config('domain');
       settings.prefix = service.config('prefix');
       settings.api = service.config('api');
       settings.models = {};
-      for (let modelName in service._models) {
-        let Model = service._models[modelName];
+      for (let modelName in service.models) {
+        let Model = service.models[modelName];
         if (!Model || Model.hidden) {
           continue;
         }
@@ -176,7 +176,7 @@ export default class AdminService extends alaska.Service {
       let Role = this.model('user.Role');
       for (let role of user.roles) {
         if (typeof role == 'string') {
-          role = await Role.getCache(role);
+          role = await Role.findCache(role);
         }
         if (role) {
           addAbilities(role.abilities);
@@ -222,7 +222,7 @@ export default class AdminService extends alaska.Service {
    */
   async registerMenu(data) {
     let AdminMenu = this.model('AdminMenu');
-    let record = AdminMenu.getCache(data.id);
+    let record = AdminMenu.findCache(data.id);
     if (record) {
       return record;
     }
