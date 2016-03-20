@@ -11,6 +11,7 @@ export default class AdminMenu extends service.Model {
   static label = '管理菜单';
   static title = 'label';
   static defaultColumns = 'icon,label,type,sort,link,ability,activated';
+  static searchFields = 'label,link,parent';
   static noremove = true;
 
   static fields = {
@@ -39,9 +40,7 @@ export default class AdminMenu extends service.Model {
     },
     ability: {
       label: '权限',
-      type: String,
-      default: '',
-      fullWidth: true
+      type: ['user.Ability']
     },
     link: {
       label: '链接',

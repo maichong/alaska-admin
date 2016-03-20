@@ -75,7 +75,7 @@ export default class AdminService extends alaska.Service {
           label: Model.label,
           type: 'link',
           link: `/list/${service.id}/${Model.name}`,
-          ability: ability + 'read',
+          ability: [ability + 'read'],
           activated: true
         })).save();
       }
@@ -91,7 +91,9 @@ export default class AdminService extends alaska.Service {
 
     let alaska = this.alaska;
 
-    let services = {};
+    let result = {};
+
+    let services = result.services = {};
 
     for (let serviceId in alaska.services) {
       let service = alaska.services[serviceId];
@@ -133,12 +135,7 @@ export default class AdminService extends alaska.Service {
         }
         for (let path in Model.fields) {
           let field = Model.fields[path];
-          let options;
-          if (field.type.viewOptions) {
-            options = field.type.viewOptions(field, Model);
-          } else {
-            options = alaska.Field.viewOptions.call(field.type, field, Model);
-          }
+          let options = field.viewOptions();
           if (options.label == '_ID') {
             options.label = 'ID';
           }
@@ -156,7 +153,7 @@ export default class AdminService extends alaska.Service {
       services[service.id] = settings;
     }
 
-    let abilities = {};
+    let abilities = result.abilities = {};
 
     function addAbilities(list) {
       if (list) {
@@ -208,11 +205,16 @@ export default class AdminService extends alaska.Service {
       }
     });
 
-    return {
-      services,
-      abilities,
-      menu: _.filter(menu, item => !item.isSub)
-    };
+    result.menu = _.filter(menu, item => !item.isSub);
+
+    for (let serviceId in alaska.services) {
+      let service = alaska.services[serviceId];
+      if (service != this && service.settings) {
+        await service.settings(user, result);
+      }
+    }
+
+    return result;
   }
 
   /**
