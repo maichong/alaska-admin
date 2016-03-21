@@ -8,7 +8,8 @@
     html, body {
       display: block;
       padding: 0;
-      margin: 0;;
+      margin: 0;
+      background: #eaf0f5;
     }
 
     .boot-loading {
@@ -16,9 +17,13 @@
       text-align: center;
       color: #00bcd4;
       font-size: 16px;
+      background: #eaf0f5;
     }
   </style>
-  <link href="static/fonts/material-icons.css" rel="stylesheet">
+  <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/flat-ui/2.2.2/css/flat-ui.css" rel="stylesheet">
 </head>
 <body>
 <div id="app">

@@ -32,11 +32,13 @@ export default async function (ctx, next) {
   let Model = s.model(modelName);
 
   let titleField = Model.title || 'title';
+  
+  let filters = Model.createFilters(keyword, ctx.query.filters || {});
 
-  //TODO filters
   let results = await Model.paginate({
     page,
-    perPage
+    perPage,
+    filters
   }).select(titleField);
 
   ctx.body = {

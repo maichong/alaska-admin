@@ -1,6 +1,6 @@
 {
   "name": "alaska-admin",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Alaska admin service",
   "main": "lib/alaska-admin.js",
   "scripts": {
