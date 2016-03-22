@@ -32,7 +32,7 @@ export default async function (ctx, next) {
   let Model = s.model(modelName);
 
   let titleField = Model.title || 'title';
-  
+
   let filters = Model.createFilters(keyword, ctx.query.filters || {});
 
   let results = await Model.paginate({
@@ -48,9 +48,9 @@ export default async function (ctx, next) {
     total: results.total,
     results: _.map(results.results, record => {
       let tmp = {
-        _id: record.id
+        value: record.id
       };
-      tmp.title = record[titleField] || tmp.id;
+      tmp.label = record[titleField] || tmp.id;
       return tmp;
     })
   };
