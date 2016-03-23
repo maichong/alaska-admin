@@ -21,13 +21,11 @@ export default async function list(ctx, next) {
   }
   let Model = service.model(modelName);
 
-  //TODO filters
-  let filters = ctx.query.filters || {};
+  let filters = Model.createFilters(ctx.query.search, ctx.query.filters);
 
   let results = await Model.paginate({
     page: parseInt(ctx.query.page) || 1,
-    perPage: parseInt(ctx.query.perPage) || 20,
-    search: (ctx.query.search || '').trim(),
+    perPage: parseInt(ctx.query.perPage) || 50,
     filters
   });
 
