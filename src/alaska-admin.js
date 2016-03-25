@@ -55,7 +55,7 @@ export default class AdminService extends alaska.Service {
       let service = alaska.services[serviceId];
       for (let modelName in service.models) {
         let Model = service.models[modelName];
-        let ability = `admin.${service.id}.${Model.name}.`.toLowerCase();
+        let ability = `admin.${Model.key}.`.toLowerCase();
         ['read', 'create', 'remove', 'update'].forEach(action => {
           userService.registerAbility({
             id: ability + action,
@@ -66,7 +66,7 @@ export default class AdminService extends alaska.Service {
         if (Model.hidden) {
           continue;
         }
-        let id = `model.${service.id}.${Model.name}`.toLowerCase();
+        let id = `model.${Model.key}`.toLowerCase();
         if (menus[id]) {
           continue;
         }
@@ -110,6 +110,8 @@ export default class AdminService extends alaska.Service {
         }
         let model = {
           name: Model.name,
+          id: Model.id,
+          key: Model.key,
           label: Model.label,
           title: Model.title,
           sort: Model.sort,
