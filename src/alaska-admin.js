@@ -121,6 +121,7 @@ export default class AdminService extends alaska.Service {
           noedit: Model.noedit,
           noremove: Model.noremove,
           groups: Model.groups,
+          relationships: Model.relationships,
           fields: {}
         };
         if (!model.defaultColumns) {

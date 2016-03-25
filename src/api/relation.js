@@ -33,7 +33,7 @@ export default async function (ctx, next) {
 
   let titleField = Model.title || 'title';
 
-  let filters = Model.createFilters(keyword, ctx.query.filters || {});
+  let filters = Model.createFilters(keyword, ctx.query.filters);
 
   let results = await Model.paginate({
     page,

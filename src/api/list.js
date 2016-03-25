@@ -4,12 +4,14 @@
  * @author Liang <liang@maichong.it>
  */
 
-import alaska from 'alaska';
+const service = __service;
+const alaska = service.alaska;
 
 export default async function list(ctx, next) {
   await ctx.checkAbility('admin');
   let serviceId = ctx.query.service;
   let modelName = ctx.query.model;
+  let keyword = ctx.query.search || '';
   if (!serviceId || !modelName) {
     alaska.error('Invalid parameters');
   }
@@ -21,7 +23,7 @@ export default async function list(ctx, next) {
   }
   let Model = service.model(modelName);
 
-  let filters = Model.createFilters(ctx.query.search, ctx.query.filters);
+  let filters = Model.createFilters(keyword, ctx.query.filters);
 
   let results = await Model.paginate({
     page: parseInt(ctx.query.page) || 1,

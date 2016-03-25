@@ -4,7 +4,8 @@
  * @author Liang <liang@maichong.it>
  */
 
-import alaska from 'alaska';
+const service = __service;
+const alaska = service.alaska;
 
 export default async function (ctx, next) {
   await ctx.checkAbility('admin');
