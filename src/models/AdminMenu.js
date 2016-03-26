@@ -11,6 +11,7 @@ export default class AdminMenu extends service.Model {
   static label = '管理菜单';
   static title = 'label';
   static defaultColumns = 'icon,label,type,sort,link,ability,activated';
+  static defaultSort = '-sort';
   static searchFields = 'label,link,parent';
   static noremove = true;
 
@@ -57,7 +58,7 @@ export default class AdminMenu extends service.Model {
       ref: 'AdminMenu'
     },
     sort: {
-      label: '排序',
+      label: '排序值',
       type: Number,
       default: 0
     },

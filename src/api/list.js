@@ -25,11 +25,16 @@ export default async function list(ctx, next) {
 
   let filters = Model.createFilters(keyword, ctx.query.filters);
 
-  let results = await Model.paginate({
+  let query = Model.paginate({
     page: parseInt(ctx.query.page) || 1,
     perPage: parseInt(ctx.query.perPage) || 50,
     filters
   });
 
-  ctx.body = results;
+  let sort = ctx.query.sort || Model.defaultSort;
+  if (sort) {
+    query.sort(sort);
+  }
+
+  ctx.body = await query;
 }
