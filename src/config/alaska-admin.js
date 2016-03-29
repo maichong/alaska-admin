@@ -10,10 +10,10 @@ export default {
   prefix: '/admin',
   statics: [{
     root: process.cwd() + '/runtime/alaska-admin-view/build',
-    prefix: '/js'
+    prefix: '/static/js'
   }, {
-    root: join(__dirname, '../../static'),
-    prefix: '/static'
+    root: join(__dirname, '../../static/img'),
+    prefix: '/static/img'
   }],
   templates: '../templates',
   services: [

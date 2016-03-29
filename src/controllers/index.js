@@ -8,5 +8,7 @@ export async function index(ctx) {
   if (!ctx.path.endsWith('/') && ctx.path.lastIndexOf('/') < 1) {
     return ctx.redirect(ctx.path + '/');
   }
-  await ctx.show('index.swig');
+  await ctx.show('index.swig', {
+    prefix: ctx.service.config('prefix')
+  });
 }

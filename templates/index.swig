@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Alaska admin dashboard</title>
+  <script>
+    var PREFIX = '{{ prefix }}';
+  </script>
   <meta name="renderer" content="webkit">
   <style>
     html, body {
@@ -31,9 +34,9 @@
 </div>
 
 {% if env=='production' %}
-  <script type="application/javascript" src="js/app.min.js"></script>
+  <script type="application/javascript" src="static/js/app.min.js"></script>
 {% else %}
-  <script type="application/javascript" src="js/app.js"></script>
+  <script type="application/javascript" src="static/js/app.js"></script>
 {% endif %}
 </body>
 </html>
