@@ -17,18 +17,18 @@ export default async function (ctx, next) {
     if (!serviceId || !modelName || !path) {
       alaska.error('Invalid parameters');
     }
-    let ability = `admin.${serviceId}.${modelName}.`.toLowerCase();
+    let service = ctx.alaska.services[serviceId];
+    if (!service) {
+      alaska.error('Invalid parameters');
+    }
+    let Model = service.model(modelName);
+    let ability = `admin.${Model.key}.`;
     if (id) {
       ability += 'update';
     } else {
       ability += 'create';
     }
     await ctx.checkAbility(ability);
-    let service = ctx.alaska.services[serviceId];
-    if (!service) {
-      alaska.error('Invalid parameters');
-    }
-    let Model = service.model(modelName);
 
     let FieldType = Model.fields[path].type;
     if (!FieldType || !FieldType.upload) {

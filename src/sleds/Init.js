@@ -19,6 +19,12 @@ export default class Init extends __service.Sled {
     const alaska = service.alaska;
     const USER = service.service('user');
     const AdminMenu = service.model('AdminMenu');
+
+    USER.run('RegisterAbility', {
+      id: 'admin',
+      title: `Admin login`,
+      service: 'alaska-admin'
+    });
     const admin = await USER.run('RegisterRole', {
       id: 'admin',
       title: 'Admin',

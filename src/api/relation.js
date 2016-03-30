@@ -21,15 +21,15 @@ export default async function (ctx, next) {
   if (!serviceId || !modelName) {
     alaska.error('Invalid parameters');
   }
-
-  let ability = `admin.${serviceId}.${modelName}.read`.toLowerCase();
-  await ctx.checkAbility(ability);
-
   let s = alaska.services[serviceId];
   if (!s) {
     alaska.error('Invalid parameters');
   }
   let Model = s.model(modelName);
+
+  let ability = `admin.${Model.key}.read`;
+  await ctx.checkAbility(ability);
+
 
   let titleField = Model.title || 'title';
 
