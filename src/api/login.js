@@ -4,15 +4,19 @@
  * @author Liang <liang@maichong.it>
  */
 
-const service = __service;
-const userService = service.service('user');
+const USER = alaska.service('alaska-user');
 
 export async function login(ctx) {
   let username = ctx.request.body.username || service.error('Username is required!');
   let password = ctx.request.body.password || service.error('Password is required!');
-  let user = await userService.login(ctx, username, password);
+  let user = await USER.login(ctx, username, password);
   let access = await user.hasAbility('admin');
-  let settings = {};
+  let settings = {
+    locales: {
+      'alaska-admin': service.locales
+    },
+    locale: ctx.locale
+  };
   if (access) {
     settings = await service.settings(user);
   }
@@ -25,7 +29,7 @@ export async function login(ctx) {
 }
 
 export async function logout(ctx) {
-  await userService.logout(ctx);
+  await USER.logout(ctx);
   ctx.body = {};
 }
 
@@ -33,7 +37,13 @@ export async function info(ctx) {
   let user = ctx.user;
   if (!user) {
     ctx.body = {
-      signed: false
+      signed: false,
+      settings: {
+        locales: {
+          'alaska-admin': service.locales
+        },
+        locale: ctx.locale
+      }
     };
     return;
   }
@@ -43,6 +53,7 @@ export async function info(ctx) {
   if (access) {
     settings = await service.settings(user);
   }
+  settings.locale = ctx.locale;
   ctx.body = {
     signed: true,
     user: user.data(),

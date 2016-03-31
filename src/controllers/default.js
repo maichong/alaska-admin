@@ -4,7 +4,7 @@
  * @author Liang <liang@maichong.it>
  */
 
-export async function index(ctx) {
+export default async function (ctx) {
   if (!ctx.path.endsWith('/') && ctx.path.lastIndexOf('/') < 1) {
     return ctx.redirect(ctx.path + '/');
   }

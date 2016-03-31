@@ -4,13 +4,8 @@
  * @author Liang <liang@maichong.it>
  */
 
-'use strict';
-
-const service = __service;
-const alaska = service.alaska;
-const _ = require('lodash');
-
-export default async function (ctx, next) {
+import _ from 'lodash';
+export default async function (ctx) {
   await ctx.checkAbility('admin');
   let serviceId = ctx.query.service;
   let modelName = ctx.query.model;
@@ -30,16 +25,22 @@ export default async function (ctx, next) {
   let ability = `admin.${Model.key}.read`;
   await ctx.checkAbility(ability);
 
-
   let titleField = Model.title || 'title';
 
   let filters = Model.createFilters(keyword, ctx.query.filters);
 
-  let results = await Model.paginate({
+  let query = Model.paginate({
     page,
     perPage,
     filters
   }).select(titleField);
+
+  let sort = ctx.query.sort || Model.defaultSort;
+  if (sort) {
+    query.sort(sort);
+  }
+
+  let results = await query;
 
   ctx.body = {
     service: serviceId,

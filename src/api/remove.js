@@ -4,10 +4,7 @@
  * @author Liang <liang@maichong.it>
  */
 
-const service = __service;
-const alaska = service.alaska;
-
-export default async function remove(ctx, next) {
+export default async function remove(ctx) {
   await ctx.checkAbility('admin');
   let serviceId = ctx.query.service;
   let modelName = ctx.query.model;
@@ -17,11 +14,11 @@ export default async function remove(ctx, next) {
     alaska.error('Invalid parameters');
   }
 
-  let service = ctx.alaska.services[serviceId];
-  if (!service) {
+  let s = ctx.alaska.services[serviceId];
+  if (!s) {
     alaska.error('Invalid parameters');
   }
-  let Model = service.model(modelName);
+  let Model = s.model(modelName);
 
   let ability = `admin.${Model.key}.remove`;
   await ctx.checkAbility(ability);

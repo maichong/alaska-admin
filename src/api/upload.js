@@ -4,10 +4,7 @@
  * @author Liang <liang@maichong.it>
  */
 
-const service = __service;
-const alaska = service.alaska;
-
-export default async function (ctx, next) {
+export default async function (ctx) {
   try {
     await ctx.checkAbility('admin');
     let serviceId = ctx.query.service;
@@ -17,11 +14,11 @@ export default async function (ctx, next) {
     if (!serviceId || !modelName || !path) {
       alaska.error('Invalid parameters');
     }
-    let service = ctx.alaska.services[serviceId];
-    if (!service) {
+    let s = ctx.alaska.services[serviceId];
+    if (!s) {
       alaska.error('Invalid parameters');
     }
-    let Model = service.model(modelName);
+    let Model = s.model(modelName);
     let ability = `admin.${Model.key}.`;
     if (id) {
       ability += 'update';

@@ -4,16 +4,13 @@
  * @author Liang <liang@maichong.it>
  */
 
-'use strict';
-
 import _ from 'lodash';
-
 import RegisterMenu from './RegisterMenu';
 
 /**
  * 自动已经系统中所有的模型,注册管理员后台菜单
  */
-export default class Init extends __service.Sled {
+export default class Init extends service.Sled {
   async exec() {
     const service = this.service;
     const alaska = service.alaska;
@@ -22,10 +19,10 @@ export default class Init extends __service.Sled {
 
     USER.run('RegisterAbility', {
       id: 'admin',
-      title: `Admin login`,
+      title: 'Admin login',
       service: 'alaska-admin'
     });
-    const admin = await USER.run('RegisterRole', {
+    await USER.run('RegisterRole', {
       id: 'admin',
       title: 'Admin',
       abilities: ['admin']
@@ -35,7 +32,7 @@ export default class Init extends __service.Sled {
       title: 'Root',
       abilities: ['admin']
     });
-    let menus = _.reduce(await AdminMenu.find(), (res, menu)=> {
+    let menus = _.reduce(await AdminMenu.find(), (res, menu) => {
       res[menu._id] = menu;
       return res;
     }, {});
@@ -52,7 +49,9 @@ export default class Init extends __service.Sled {
             title: `${action} ${Model.name}`,
             service: 'alaska-admin'
           });
-          root.abilities.push(id);
+          if (root.abilities.indexOf(id) < 0) {
+            root.abilities.push(id);
+          }
         });
         if (Model.hidden) {
           continue;

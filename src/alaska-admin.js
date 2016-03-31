@@ -21,15 +21,13 @@ export default class AdminService extends alaska.Service {
   /**
    * [async] 获取管理平台前台配置
    * @param {User} user
-   * @returns {object}
+   * @returns {Object}
    */
   async settings(user) {
-
     let alaska = this.alaska;
-
     let result = {};
-
     let services = result.services = {};
+    let locales = result.locales = {};
 
     for (let serviceId in alaska.services) {
       let service = alaska.services[serviceId];
@@ -39,6 +37,7 @@ export default class AdminService extends alaska.Service {
       settings.prefix = service.config('prefix');
       settings.api = service.config('api');
       settings.models = {};
+      locales[serviceId] = service.locales;
       for (let modelName in service.models) {
         let Model = service.models[modelName];
         if (!Model || Model.hidden) {

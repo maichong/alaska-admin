@@ -4,15 +4,12 @@
  * @author Liang <liang@maichong.it>
  */
 
-'use strict';
-
 /**
  * 注册管理员后台菜单
  */
-export default class RegisterMenu extends __service.Sled {
+export default class RegisterMenu extends service.Sled {
 
   async exec() {
-    const service = this.service;
     const AdminMenu = service.model('AdminMenu');
 
     const id = this.data.id || this.data._id;

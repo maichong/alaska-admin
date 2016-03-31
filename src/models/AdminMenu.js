@@ -4,11 +4,9 @@
  * @author Liang <liang@maichong.it>
  */
 
-const service = __service;
-
 export default class AdminMenu extends service.Model {
 
-  static label = '管理菜单';
+  static label = 'Admin Menu';
   static title = 'label';
   static defaultColumns = 'icon,label,type,sort,link,ability,activated';
   static defaultSort = '-sort';
@@ -18,17 +16,17 @@ export default class AdminMenu extends service.Model {
   static fields = {
     _id: String,
     label: {
-      label: '标题',
+      label: 'Title',
       type: String,
       required: true
     },
     icon: {
-      label: '图标',
+      label: 'Icon',
       type: String,
       default: ''
     },
     type: {
-      label: '类型',
+      label: 'Type',
       type: 'select',
       default: 'link',
       options: [{
@@ -40,11 +38,11 @@ export default class AdminMenu extends service.Model {
       }]
     },
     ability: {
-      label: '权限',
+      label: 'Ability',
       type: ['user.Ability']
     },
     link: {
-      label: '链接',
+      label: 'Link',
       type: String,
       default: '',
       depends: {
@@ -53,17 +51,17 @@ export default class AdminMenu extends service.Model {
       fullWidth: true
     },
     parent: {
-      label: '父菜单',
+      label: 'Parent Menu',
       type: 'relationship',
       ref: 'AdminMenu'
     },
     sort: {
-      label: '排序值',
+      label: 'Sort',
       type: Number,
       default: 0
     },
     activated: {
-      label: '激活',
+      label: 'Activated',
       type: Boolean
     }
   };
