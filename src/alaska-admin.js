@@ -18,6 +18,21 @@ export default class AdminService extends alaska.Service {
     super(options, alaska);
   }
 
+  postInit() {
+    const MAIN = this.alaska.main;
+    MAIN.applyConfig({
+      '+appMiddlewares': [{
+        id: 'koa-bodyparser',
+        sort: 1000,
+        options: MAIN.config('koa-bodyparser')
+      }, {
+        id: 'alaska-upload',
+        sort: 1000,
+        options: MAIN.config('alaska-upload')
+      }]
+    });
+  }
+
   /**
    * [async] 获取管理平台前台配置
    * @param {User} user
