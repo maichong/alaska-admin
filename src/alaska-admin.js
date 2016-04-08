@@ -33,6 +33,12 @@ export default class AdminService extends alaska.Service {
     });
   }
 
+  async preMount() {
+    if (this.config('autoInit')) {
+      this.run('Init');
+    }
+  }
+
   /**
    * [async] 获取管理平台前台配置
    * @param {User} user
