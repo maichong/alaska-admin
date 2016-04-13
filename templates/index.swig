@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>Alaska admin dashboard</title>
+  <title>{{ t(c('dashboardTitle')) }}</title>
   <script>
     var PREFIX = '{{ prefix }}';
   </script>

@@ -22,5 +22,6 @@ export default {
   /**
    * run Init sled when every launch
    */
-  autoInit: true
+  autoInit: true,
+  dashboardTitle: 'Alaska admin dashboard'
 };

@@ -34,4 +34,7 @@ export default{
   'Please enter the new password again': '请再次输入新密码',
   'The passwords are not match': '两次输入的密码不匹配',
   'Invalid image format': '无效的图片格式',
+  'Username is required': '请输入用户名',
+  'Password is required': '请输入密码',
+  'Alaska admin dashboard': 'Alaska管理平台'
 };

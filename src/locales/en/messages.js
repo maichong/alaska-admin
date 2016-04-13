@@ -35,4 +35,7 @@ export default{
   'Please enter the new password again': 'Please enter the new password again',
   'The passwords are not match': 'The passwords are not match',
   'Invalid image format': 'Invalid image format',
+  'Username is required': 'Username is required',
+  'Password is required': 'Password is required',
+  'Alaska admin dashboard': 'Alaska admin dashboard'
 };

@@ -7,9 +7,9 @@
 const USER = alaska.service('alaska-user');
 
 export async function login(ctx) {
-  let username = ctx.request.body.username || service.error('Username is required!');
-  let password = ctx.request.body.password || service.error('Password is required!');
-  let user = await USER.login(ctx, username, password);
+  let username = ctx.request.body.username || service.error('Username is required');
+  let password = ctx.request.body.password || service.error('Password is required');
+  let user = await USER.run('Login', { ctx, username, password });
   let access = await user.hasAbility('admin');
   let settings = {
     locales: {
@@ -29,7 +29,7 @@ export async function login(ctx) {
 }
 
 export async function logout(ctx) {
-  await USER.logout(ctx);
+  await USER.run('Logout', { ctx });
   ctx.body = {};
 }
 
