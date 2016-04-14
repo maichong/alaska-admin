@@ -66,6 +66,7 @@ export default class Init extends service.Sled {
           type: 'link',
           link: `/list/${ser.id}/${Model.name}`,
           ability: [ability + 'read'],
+          service: serviceId,
           activated: true
         });
       }

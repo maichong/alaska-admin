@@ -8,7 +8,7 @@ export default class AdminMenu extends service.Model {
 
   static label = 'Admin Menu';
   static title = 'label';
-  static defaultColumns = 'icon,label,type,sort,link,ability,activated';
+  static defaultColumns = 'icon,label,type,sort,service,link,ability,activated';
   static defaultSort = '-sort';
   static searchFields = 'label,link,parent';
   static noremove = true;
@@ -53,7 +53,14 @@ export default class AdminMenu extends service.Model {
     parent: {
       label: 'Parent Menu',
       type: 'relationship',
-      ref: 'AdminMenu'
+      ref: 'AdminMenu',
+      filters: {
+        type: 'group'
+      }
+    },
+    service: {
+      label: 'Service',
+      type: String
     },
     sort: {
       label: 'Sort',

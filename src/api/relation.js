@@ -11,7 +11,7 @@ export default async function (ctx) {
   let modelName = ctx.query.model;
   let keyword = ctx.query.search || '';
   let page = parseInt(ctx.query.page) || 1;
-  let perPage = parseInt(ctx.query.perPage) || 100;
+  let perPage = parseInt(ctx.query.perPage) || 1000;
 
   if (!serviceId || !modelName) {
     alaska.error('Invalid parameters');
