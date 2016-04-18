@@ -14,12 +14,12 @@ export async function login(ctx) {
   let settings = {
     locales: {
       'alaska-admin': service.locales
-    },
-    locale: ctx.locale
+    }
   };
   if (access) {
     settings = await service.settings(user);
   }
+  settings.locale = ctx.locale;
   ctx.body = {
     signed: true,
     user: user.data(),
