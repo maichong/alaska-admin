@@ -6,9 +6,9 @@
 
 export default async function remove(ctx) {
   await ctx.checkAbility('admin');
-  let serviceId = ctx.query.service;
-  let modelName = ctx.query.model;
-  let id = ctx.request.body.id;
+  let serviceId = ctx.state.service || ctx.query.service;
+  let modelName = ctx.state.model || ctx.query.model;
+  let id = ctx.state.id || ctx.request.body.id;
 
   if (!serviceId || !modelName) {
     alaska.error('Invalid parameters');

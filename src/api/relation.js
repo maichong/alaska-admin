@@ -7,11 +7,11 @@
 import _ from 'lodash';
 export default async function (ctx) {
   await ctx.checkAbility('admin');
-  let serviceId = ctx.query.service;
-  let modelName = ctx.query.model;
-  let keyword = ctx.query.search || '';
-  let page = parseInt(ctx.query.page) || 1;
-  let perPage = parseInt(ctx.query.perPage) || 1000;
+  let serviceId = ctx.state.service || ctx.query.service;
+  let modelName = ctx.state.model || ctx.query.model;
+  let keyword = ctx.state.search || ctx.query.search || '';
+  let page = parseInt(ctx.state.page || ctx.query.page) || 1;
+  let perPage = parseInt(ctx.state.perPage || ctx.query.perPage) || 1000;
 
   if (!serviceId || !modelName) {
     alaska.error('Invalid parameters');
@@ -27,7 +27,7 @@ export default async function (ctx) {
 
   let titleField = Model.title || 'title';
 
-  let filters = Model.createFilters(keyword, ctx.query.filters);
+  let filters = Model.createFilters(keyword, ctx.state.filters || ctx.query.filters);
 
   let query = Model.paginate({
     page,
@@ -35,7 +35,7 @@ export default async function (ctx) {
     filters
   }).select(titleField);
 
-  let sort = ctx.query.sort || Model.defaultSort;
+  let sort = ctx.state.sort || ctx.query.sort || Model.defaultSort;
   if (sort) {
     query.sort(sort);
   }

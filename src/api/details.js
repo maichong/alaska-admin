@@ -6,13 +6,13 @@
 
 export default async function list(ctx) {
   await ctx.checkAbility('admin');
-  let serviceId = ctx.query.service;
-  let modelName = ctx.query.model;
-  let id = ctx.query.id;
+  let serviceId = ctx.state.service || ctx.query.service;
+  let modelName = ctx.state.model || ctx.query.model;
+  let id = ctx.state.id || ctx.query.id;
   if (!serviceId || !modelName || !id) {
     alaska.error('Invalid parameters');
   }
-  let s = ctx.alaska.services[serviceId];
+  let s = ctx.alaska.service(serviceId, true);
   if (!s) {
     alaska.error('Invalid parameters');
   }

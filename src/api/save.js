@@ -6,9 +6,10 @@
 
 export default async function (ctx) {
   await ctx.checkAbility('admin');
-  let serviceId = ctx.query.service;
-  let modelName = ctx.query.model;
-  let id = ctx.request.body.id;
+  let serviceId = ctx.state.service || ctx.query.service;
+  let modelName = ctx.state.model || ctx.query.model;
+  let data = ctx.state.data || ctx.request.body;
+  let id = data.id;
   if (!serviceId || !modelName) {
     alaska.error('Invalid parameters');
   }
@@ -36,7 +37,7 @@ export default async function (ctx) {
   } else {
     record = new Model();
   }
-  record.set(ctx.request.body);
+  record.set(data);
 
   await alaska.try(record.save());
 
