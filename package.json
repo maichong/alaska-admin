@@ -1,6 +1,6 @@
 {
   "name": "alaska-admin",
-  "version": "0.8.3",
+  "version": "0.8.4",
   "description": "Alaska admin service",
   "main": "lib/alaska-admin.js",
   "scripts": {
@@ -28,12 +28,12 @@
   },
   "homepage": "https://github.com/maichong/alaska-admin#readme",
   "peerDependencies": {
-    "alaska": "^0.8.5"
+    "alaska": "^0.8.6"
   },
   "dependencies": {
-    "alaska-field-checkbox": "^0.4.4",
-    "alaska-field-select": "^0.7.3",
-    "alaska-user": "^0.8.1",
+    "alaska-field-checkbox": "^0.8.0",
+    "alaska-field-select": "^0.8.0",
+    "alaska-user": "^0.8.2",
     "alaska-upload": "^0.1.1",
     "koa-bodyparser": "^3.0.0"
   }

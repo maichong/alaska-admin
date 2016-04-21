@@ -28,6 +28,7 @@ export default{
   other {{total}条记录}
   }`,
   'This field is required!': '此项必填!',
+  'Remove Record': '删除记录',
   'confirm remove record': '确定要删除本条记录吗?删除后,数据将无法恢复!',
   'Enter new password': '输入新密码',
   'Repeat password': '再次输入新密码',
@@ -36,5 +37,6 @@ export default{
   'Invalid image format': '无效的图片格式',
   'Username is required': '请输入用户名',
   'Password is required': '请输入密码',
-  'Alaska admin dashboard': 'Alaska管理平台'
+  'Alaska admin dashboard': 'Alaska管理平台',
+  Search: '搜索'
 };

@@ -10,8 +10,9 @@ export default async function (ctx) {
   let serviceId = ctx.state.service || ctx.query.service;
   let modelName = ctx.state.model || ctx.query.model;
   let keyword = ctx.state.search || ctx.query.search || '';
+  let value = ctx.state.value || ctx.query.value || '';
   let page = parseInt(ctx.state.page || ctx.query.page) || 1;
-  let perPage = parseInt(ctx.state.perPage || ctx.query.perPage) || 1000;
+  let perPage = parseInt(ctx.state.perPage || ctx.query.perPage) || 100;
 
   if (!serviceId || !modelName) {
     alaska.error('Invalid parameters');
@@ -42,17 +43,32 @@ export default async function (ctx) {
 
   let results = await query;
 
+  let records = _.map(results.results, record => {
+    let tmp = {
+      value: record.id
+    };
+    tmp.label = record[titleField] || tmp.value;
+    if (value && value === tmp.value) {
+      value = '';
+    }
+    return tmp;
+  });
+
+  if (value) {
+    let record = await Model.findCache(value);
+    if (record) {
+      records.unshift({
+        value: record.id,
+        label: record[titleField] || value
+      });
+    }
+  }
+
   ctx.body = {
     service: serviceId,
     model: modelName,
     next: results.next,
     total: results.total,
-    results: _.map(results.results, record => {
-      let tmp = {
-        value: record.id
-      };
-      tmp.label = record[titleField] || tmp.id;
-      return tmp;
-    })
+    results: records
   };
 }
