@@ -55,12 +55,17 @@ export default async function (ctx) {
   });
 
   if (value) {
-    let record = await Model.findCache(value);
-    if (record) {
-      records.unshift({
-        value: record.id,
-        label: record[titleField] || value
-      });
+    if (typeof value === 'string') {
+      value = [value];
+    }
+    for (let id of value) {
+      let record = await Model.findCache(id);
+      if (record) {
+        records.unshift({
+          value: record.id,
+          label: record[titleField] || id
+        });
+      }
     }
   }
 
