@@ -26,9 +26,9 @@ export default class AdminService extends alaska.Service {
         sort: 1000,
         options: MAIN.config('koa-bodyparser')
       }, {
-        id: 'alaska-upload',
+        id: 'alaska-middleware-upload',
         sort: 1000,
-        options: MAIN.config('alaska-upload')
+        options: MAIN.config('alaska-middleware-upload')
       }]
     });
   }

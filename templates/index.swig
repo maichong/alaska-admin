@@ -27,6 +27,8 @@
   <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
   <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="//cdn.bootcss.com/flat-ui/2.2.2/css/flat-ui.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
 </head>
 <body>
 <div id="app">

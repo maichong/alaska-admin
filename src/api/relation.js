@@ -57,6 +57,8 @@ export default async function (ctx) {
   if (value) {
     if (typeof value === 'string') {
       value = [value];
+    } else if (!Array.isArray(value)) {
+      value = [];
     }
     for (let id of value) {
       let record = await Model.findCache(id);

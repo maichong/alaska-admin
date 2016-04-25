@@ -8,9 +8,9 @@ export default class AdminMenu extends service.Model {
 
   static label = 'Admin Menu';
   static title = 'label';
-  static defaultColumns = 'icon,label,type,sort,service,link,ability,activated';
+  static defaultColumns = 'icon label type sort service link ability activated';
   static defaultSort = '-sort';
-  static searchFields = 'label,link,parent';
+  static searchFields = 'label link parent';
   static noremove = true;
 
   static fields = {

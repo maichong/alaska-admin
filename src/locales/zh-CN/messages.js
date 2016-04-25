@@ -27,6 +27,8 @@ export default{
   =0 {没有记录}
   other {{total}条记录}
   }`,
+  'Save failed': '保存失败',
+  'Remove failed': '删除失败',
   'This field is required!': '此项必填!',
   'Remove Record': '删除记录',
   'confirm remove record': '确定要删除本条记录吗?删除后,数据将无法恢复!',
@@ -38,5 +40,14 @@ export default{
   'Username is required': '请输入用户名',
   'Password is required': '请输入密码',
   'Alaska admin dashboard': 'Alaska管理平台',
-  Search: '搜索'
+  Search: '搜索',
+  Filter: '过滤',
+  equal: '等于',
+  greater: '大于',
+  lesser: '小于',
+  between: '区间',
+  contain: '包含',
+  inverse: '反向',
+  yes: '是',
+  no: '否'
 };

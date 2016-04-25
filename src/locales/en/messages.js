@@ -28,6 +28,8 @@ export default{
   one {1 record}
   other {{total} records}
   }`,
+  'Save failed': 'Save failed',
+  'Remove failed': 'Remove failed',
   'This field is required!': 'This field is required!',
   'Remove Record': 'Remove Record',
   'confirm remove record': 'Would you confirm to remove the record? The record can not recovery after removed!',
@@ -39,5 +41,14 @@ export default{
   'Username is required': 'Username is required',
   'Password is required': 'Password is required',
   'Alaska admin dashboard': 'Alaska admin dashboard',
-  Search: 'Search'
+  Search: 'Search',
+  Filter: 'Filter',
+  equal: 'equal',
+  greater: 'greater',
+  lesser: 'lesser',
+  between: 'between',
+  contain: 'contain',
+  inverse: 'inverse',
+  yes: 'yes',
+  no: 'no'
 };
