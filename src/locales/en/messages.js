@@ -30,6 +30,8 @@ export default{
   }`,
   'Save failed': 'Save failed',
   'Remove failed': 'Remove failed',
+  'Saved successfully': 'Saved successfully',
+  'Removed successfully': 'Removed successfully',
   'This field is required!': 'This field is required!',
   'Remove Record': 'Remove Record',
   'confirm remove record': 'Would you confirm to remove the record? The record can not recovery after removed!',

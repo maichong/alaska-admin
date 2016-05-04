@@ -17,7 +17,8 @@ export default {
   }],
   templates: '../templates',
   services: [
-    { id: 'alaska-user', alias: 'user' }
+    { id: 'alaska-user', alias: 'user' },
+    { id: 'alaska-settings', alias: 'settings' }
   ],
   /**
    * run Init sled when every launch

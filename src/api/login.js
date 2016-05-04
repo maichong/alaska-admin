@@ -4,7 +4,17 @@
  * @author Liang <liang@maichong.it>
  */
 
-const USER = alaska.service('alaska-user');
+const USER = service.service('user');
+const SETTINGS = service.service('settings');
+
+async function getLogo() {
+  let logo = '';
+  let pic = await SETTINGS.get('logo');
+  if (pic && pic.url) {
+    logo = pic.url;
+  }
+  return logo;
+}
 
 export async function login(ctx) {
   let username = ctx.request.body.username || service.error('Username is required');
@@ -20,6 +30,7 @@ export async function login(ctx) {
     settings = await service.settings(user);
   }
   settings.locale = ctx.locale;
+  settings.logo = await getLogo();
   ctx.body = {
     signed: true,
     user: user.data(),
@@ -35,6 +46,7 @@ export async function logout(ctx) {
 
 export async function info(ctx) {
   let user = ctx.user;
+  const logo = await getLogo();
   if (!user) {
     ctx.body = {
       signed: false,
@@ -42,7 +54,8 @@ export async function info(ctx) {
         locales: {
           'alaska-admin': service.locales
         },
-        locale: ctx.locale
+        locale: ctx.locale,
+        logo
       }
     };
     return;
@@ -52,8 +65,13 @@ export async function info(ctx) {
   let settings = {};
   if (access) {
     settings = await service.settings(user);
+  } else {
+    settings.locales = {
+      'alaska-admin': service.locales
+    };
   }
   settings.locale = ctx.locale;
+  settings.logo = logo;
   ctx.body = {
     signed: true,
     user: user.data(),

@@ -1,7 +1,12 @@
 {
   "name": "alaska-admin",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Alaska admin service",
+  "keywords": [
+    "alaska",
+    "alaska-service",
+    "admin"
+  ],
   "main": "lib/alaska-admin.js",
   "scripts": {
     "build": "babel ./src --out-dir ./lib",
@@ -13,10 +18,6 @@
     "type": "git",
     "url": "git+https://github.com/maichong/alaska-admin.git"
   },
-  "keywords": [
-    "alaska",
-    "admin"
-  ],
   "author": {
     "email": "liang@maichong.it",
     "name": "liang",
@@ -28,12 +29,13 @@
   },
   "homepage": "https://github.com/maichong/alaska-admin#readme",
   "peerDependencies": {
-    "alaska": "^0.9.0"
+    "alaska": "^0.9.5"
   },
   "dependencies": {
+    "alaska-settings": "^0.9.0",
     "alaska-field-checkbox": "^0.9.0",
     "alaska-field-select": "^0.9.0",
-    "alaska-user": "^0.9.0",
+    "alaska-user": "^0.9.3",
     "alaska-middleware-upload": "^0.2.0",
     "koa-bodyparser": "^3.0.0"
   }

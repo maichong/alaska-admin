@@ -29,6 +29,8 @@ export default{
   }`,
   'Save failed': '保存失败',
   'Remove failed': '删除失败',
+  'Saved successfully': '保存成功',
+  'Removed successfully': '删除成功',
   'This field is required!': '此项必填!',
   'Remove Record': '删除记录',
   'confirm remove record': '确定要删除本条记录吗?删除后,数据将无法恢复!',
@@ -49,5 +51,5 @@ export default{
   contain: '包含',
   inverse: '反向',
   yes: '是',
-  no: '否'
+  no: '否',
 };

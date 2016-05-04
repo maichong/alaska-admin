@@ -13,8 +13,8 @@ import * as _ from 'lodash';
 export default class AdminService extends alaska.Service {
   constructor(options, alaska) {
     options = options || {};
-    options.id = 'alaska-admin';
-    options.dir = __dirname;
+    options.dir = options.dir || __dirname;
+    options.id = options.id || 'alaska-admin';
     super(options, alaska);
   }
 
@@ -35,7 +35,13 @@ export default class AdminService extends alaska.Service {
 
   async preMount() {
     if (this.config('autoInit')) {
-      this.run('Init');
+      let services = Object.keys(this.alaska.services);
+      for (let serviceId of services) {
+        let Init = this.alaska.service(serviceId).sleds.Init;
+        if (Init) {
+          await Init.run();
+        }
+      }
     }
   }
 

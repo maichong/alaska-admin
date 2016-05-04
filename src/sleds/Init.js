@@ -7,6 +7,8 @@
 import _ from 'lodash';
 import RegisterMenu from './RegisterMenu';
 
+const SETTINGS = service.service('settings');
+
 /**
  * 自动已经系统中所有的模型,注册管理员后台菜单
  */
@@ -16,6 +18,23 @@ export default class Init extends service.Sled {
     const alaska = service.alaska;
     const USER = service.service('user');
     const AdminMenu = service.model('AdminMenu');
+
+    RegisterMenu.run({
+      id: 'admin.settings',
+      label: 'Settings',
+      type: 'link',
+      link: `/settings`,
+      ability: ['admin.settings.write'],
+      service: 'alaska-settings',
+      activated: true
+    });
+
+    SETTINGS.register({
+      id: 'logo',
+      title: 'Logo',
+      service: 'alaska-admin',
+      type: 'ImageFieldView'
+    });
 
     USER.run('RegisterAbility', {
       id: 'admin',
