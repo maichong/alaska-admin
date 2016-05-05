@@ -24,7 +24,7 @@ export default class Init extends service.Sled {
       label: 'Settings',
       type: 'link',
       link: `/settings`,
-      ability: ['admin.settings.write'],
+      ability: ['admin.alaska-settings.settings.update'],
       service: 'alaska-settings',
       activated: true
     });
