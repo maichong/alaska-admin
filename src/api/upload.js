@@ -9,8 +9,9 @@ export default async function (ctx) {
     await ctx.checkAbility('admin');
     let serviceId = ctx.state.service || ctx.query.service;
     let modelName = ctx.state.model || ctx.query.model;
-    let id = ctx.state.id || ctx.request.body.id;
-    let path = ctx.state.path || ctx.request.body.path;
+    let body = ctx.state.body || ctx.request.body;
+    let id = body.id || ctx.request.body.id;
+    let path = body.path || ctx.request.body.path;
     if (!serviceId || !modelName || !path) {
       alaska.error('Invalid parameters');
     }
