@@ -1,6 +1,6 @@
 {
   "name": "alaska-admin",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "description": "Alaska admin service",
   "keywords": [
     "alaska",
@@ -29,10 +29,10 @@
   },
   "homepage": "https://github.com/maichong/alaska-admin#readme",
   "peerDependencies": {
-    "alaska": "^0.9.8"
+    "alaska": "^0.9.11"
   },
   "dependencies": {
-    "alaska-settings": "^0.9.0",
+    "alaska-settings": "^0.9.1",
     "alaska-field-checkbox": "^0.9.0",
     "alaska-field-select": "^0.9.1",
     "alaska-user": "^0.9.3",

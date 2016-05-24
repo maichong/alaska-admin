@@ -11,7 +11,6 @@ export default class AdminMenu extends service.Model {
   static defaultColumns = 'icon label type sort service link ability activated';
   static defaultSort = '-sort';
   static searchFields = 'label link parent';
-  static noremove = true;
 
   static fields = {
     _id: String,
@@ -75,7 +74,7 @@ export default class AdminMenu extends service.Model {
 
   async preSave() {
     if (this.parent && this.parent == this._id) {
-      throw new Error('父菜单不能为自己');
+      throw new Error('Parent can not be self');
     }
   }
 }
