@@ -84,6 +84,7 @@ export default class AdminService extends alaska.Service {
           noremove: Model.noremove,
           groups: Model.groups,
           relationships: Model.relationships,
+          actions: Model.actions || {},
           fields: {},
           searchFields: Model.searchFields || []
         };

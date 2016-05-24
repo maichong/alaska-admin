@@ -52,4 +52,6 @@ export default{
   inverse: '反向',
   yes: '是',
   no: '否',
+  Successfully: '操作成功',
+  Failed: '操作失败'
 };
