@@ -61,7 +61,8 @@ export default class Init extends service.Sled {
       for (let modelName in ser.models) {
         let Model = ser.models[modelName];
         let ability = `admin.${Model.key}.`.toLowerCase();
-        ['read', 'create', 'remove', 'update'].forEach(action => {
+
+        function registerAbility(action) {
           let id = ability + action;
           USER.run('RegisterAbility', {
             id,
@@ -71,7 +72,10 @@ export default class Init extends service.Sled {
           if (root.abilities.indexOf(id) < 0) {
             root.abilities.push(id);
           }
-        });
+        }
+
+        ['read', 'create', 'remove', 'update'].forEach(registerAbility);
+        _.keys(Model.actions).forEach(registerAbility);
         if (Model.hidden) {
           continue;
         }
