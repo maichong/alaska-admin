@@ -41,10 +41,12 @@ export default async function (ctx) {
 
   const recordModelName = Model.name.replace(/^\w/, w=>w.toLowerCase());
 
-  ctx.body = await Sled.run({
+  await Sled.run({
     [recordModelName]: record,
     body,
     admin: ctx.user,
     ctx
   });
+
+  ctx.body = record.toObject();
 }
