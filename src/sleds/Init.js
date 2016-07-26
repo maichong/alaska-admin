@@ -5,23 +5,23 @@
  */
 
 import _ from 'lodash';
+import alaska from 'alaska';
+import service from '../';
+import SETTINGS from 'alaska-settings';
+import USER from 'alaska-user';
 import RegisterMenu from './RegisterMenu';
-
-const SETTINGS = service.service('settings');
+import AdminMenu from '../models/AdminMenu';
 
 /**
  * 自动已经系统中所有的模型,注册管理员后台菜单
  */
-export default class Init extends service.Sled {
+export default class Init extends alaska.Sled {
   async exec() {
-    const service = this.service;
-    const alaska = service.alaska;
-    const USER = service.service('user');
-    const AdminMenu = service.model('AdminMenu');
 
     RegisterMenu.run({
       id: 'admin.settings',
       label: 'Settings',
+      icon: 'cogs',
       type: 'link',
       link: `/settings`,
       ability: ['admin.alaska-settings.settings.update'],
@@ -30,8 +30,22 @@ export default class Init extends service.Sled {
     });
 
     SETTINGS.register({
-      id: 'logo',
-      title: 'Logo',
+      id: 'adminLogo',
+      title: 'Admin Logo',
+      service: 'alaska-admin',
+      type: 'ImageFieldView'
+    });
+
+    SETTINGS.register({
+      id: 'adminLogoReverse',
+      title: 'Admin Logo Reverse',
+      service: 'alaska-admin',
+      type: 'ImageFieldView'
+    });
+
+    SETTINGS.register({
+      id: 'adminIcon',
+      title: 'Admin Icon',
       service: 'alaska-admin',
       type: 'ImageFieldView'
     });
@@ -86,12 +100,13 @@ export default class Init extends service.Sled {
         RegisterMenu.run({
           id,
           label: Model.label,
+          icon: Model.icon,
           type: 'link',
           link: `/list/${ser.id}/${Model.name}`,
           ability: [ability + 'read'],
           service: serviceId,
           activated: true
-        });
+        }).catch(e => console.error(e.stack));
       }
     }
     root.save();

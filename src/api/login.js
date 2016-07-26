@@ -4,12 +4,14 @@
  * @author Liang <liang@maichong.it>
  */
 
-const USER = service.service('user');
-const SETTINGS = service.service('settings');
+import alaska from 'alaska';
+import service from '../';
+import USER from 'alaska-user';
+import SETTINGS from 'alaska-settings';
 
-async function getLogo() {
+async function getLogo(key) {
   let logo = '';
-  let pic = await SETTINGS.get('logo');
+  let pic = await SETTINGS.get(key);
   if (pic && pic.url) {
     logo = pic.url;
   }
@@ -30,7 +32,9 @@ export async function login(ctx) {
     settings = await service.settings(user);
   }
   settings.locale = ctx.locale;
-  settings.logo = await getLogo();
+  settings.logoReverse = await getLogo('adminLogoReverse');
+  settings.logo = await getLogo('adminLogo');
+  settings.icon = await getLogo('adminIcon');
   ctx.body = {
     signed: true,
     user: user.data(),
@@ -46,7 +50,9 @@ export async function logout(ctx) {
 
 export async function info(ctx) {
   let user = ctx.user;
-  const logo = await getLogo();
+  const logoReverse = await getLogo('adminLogoReverse');
+  const logo = await getLogo('adminLogo');
+  const icon = await getLogo('adminIcon');
   if (!user) {
     ctx.body = {
       signed: false,
@@ -55,7 +61,9 @@ export async function info(ctx) {
           'alaska-admin': service.locales
         },
         locale: ctx.locale,
-        logo
+        logoReverse,
+        logo,
+        icon
       }
     };
     return;
@@ -72,6 +80,7 @@ export async function info(ctx) {
   }
   settings.locale = ctx.locale;
   settings.logo = logo;
+  settings.icon = icon;
   ctx.body = {
     signed: true,
     user: user.data(),

@@ -4,11 +4,14 @@
  * @author Liang <liang@maichong.it>
  */
 
-export default class AdminMenu extends service.Model {
+import alaska from 'alaska';
+
+export default class AdminMenu extends alaska.Model {
 
   static label = 'Admin Menu';
+  static icon = 'bars';
   static title = 'label';
-  static defaultColumns = 'icon label type sort service link ability activated';
+  static defaultColumns = 'icon label type parent sort service link ability activated';
   static defaultSort = '-sort';
   static searchFields = 'label link parent';
 
@@ -21,7 +24,7 @@ export default class AdminMenu extends service.Model {
     },
     icon: {
       label: 'Icon',
-      type: String,
+      type: 'icon',
       default: ''
     },
     type: {
@@ -38,7 +41,7 @@ export default class AdminMenu extends service.Model {
     },
     ability: {
       label: 'Ability',
-      type: ['user.Ability']
+      type: ['alaska-user.Ability']
     },
     link: {
       label: 'Link',

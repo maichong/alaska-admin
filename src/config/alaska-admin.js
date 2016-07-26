@@ -10,16 +10,15 @@ export default {
   prefix: '/admin',
   statics: [{
     root: process.cwd() + '/runtime/alaska-admin-view/build',
-    prefix: '/static/js'
+    prefix: '/js'
   }, {
-    root: join(__dirname, '../../static/img'),
-    prefix: '/static/img'
+    root: join(__dirname, '../static'),
+    prefix: '/static'
   }],
-  templates: '../templates',
-  services: [
-    { id: 'alaska-user', alias: 'user' },
-    { id: 'alaska-settings', alias: 'settings' }
-  ],
+  services: {
+    'alaska-user': {},
+    'alaska-settings': {}
+  },
   /**
    * run Init sled when every launch
    */

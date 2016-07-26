@@ -4,6 +4,7 @@
  * @author Liang <liang@maichong.it>
  */
 
+import alaska from 'alaska';
 
 export default async function (ctx) {
   await ctx.checkAbility('admin');
@@ -13,6 +14,7 @@ export default async function (ctx) {
   let action = ctx.state.action || ctx.query.action;
   let body = ctx.state.body || ctx.request.body;
   let id = body.id || ctx.request.body.id;
+  let records = body.records || ctx.request.body.records || [];
 
   if (!serviceId || !modelName || !action) {
     alaska.error('Invalid parameters');
@@ -41,12 +43,17 @@ export default async function (ctx) {
 
   const recordModelName = Model.name.replace(/^\w/, w=>w.toLowerCase());
 
+  if (records.length) {
+    records = await Model.find().where('_id').in(records);
+  }
+
   await Sled.run({
     [recordModelName]: record,
     body,
+    records,
     admin: ctx.user,
     ctx
   });
 
-  ctx.body = record.toObject();
+  ctx.body = {}
 }

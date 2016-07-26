@@ -4,6 +4,8 @@
  * @author Liang <liang@maichong.it>
  */
 
+import alaska from 'alaska';
+
 export default async function list(ctx) {
   await ctx.checkAbility('admin');
   let serviceId = ctx.state.service || ctx.query.service;
@@ -12,7 +14,7 @@ export default async function list(ctx) {
   if (!serviceId || !modelName || !id) {
     alaska.error('Invalid parameters');
   }
-  let s = ctx.alaska.service(serviceId, true);
+  let s = alaska.service(serviceId, true);
   if (!s) {
     alaska.error('Invalid parameters');
   }

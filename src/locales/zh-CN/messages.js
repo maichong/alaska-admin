@@ -32,8 +32,11 @@ export default{
   'Saved successfully': '保存成功',
   'Removed successfully': '删除成功',
   'This field is required!': '此项必填!',
-  'Remove Record': '删除记录',
+  'Remove record': '删除记录',
+  'Create record': '新增记录',
   'confirm remove record': '确定要删除本条记录吗?删除后,数据将无法恢复!',
+  'Remove selected records': '删除选中记录',
+  'confirm remove selected records': '确定要删除选中的所有记录吗?删除后,数据将无法恢复!',
   'Enter new password': '输入新密码',
   'Repeat password': '再次输入新密码',
   'Please enter the new password again': '请再次输入新密码',
@@ -53,5 +56,8 @@ export default{
   yes: '是',
   no: '否',
   Successfully: '操作成功',
-  Failed: '操作失败'
+  Failed: '操作失败',
+  'Admin Logo': '管理平台LOGO',
+  'Admin Logo Reverse': '管理平台LOGO反色',
+  'Admin Icon': '管理平台图标'
 };

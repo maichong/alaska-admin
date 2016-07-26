@@ -4,13 +4,14 @@
  * @author Liang <liang@maichong.it>
  */
 
+import _ from 'lodash';
 import alaska from 'alaska';
-import * as _ from 'lodash';
+import Role from 'alaska-user/models/Role';
 
 /**
  * @class AdminService
  */
-export default class AdminService extends alaska.Service {
+class AdminService extends alaska.Service {
   constructor(options, alaska) {
     options = options || {};
     options.dir = options.dir || __dirname;
@@ -19,25 +20,24 @@ export default class AdminService extends alaska.Service {
   }
 
   postInit() {
-    const MAIN = this.alaska.main;
-    MAIN.applyConfig({
+    alaska.main.applyConfig({
       '+appMiddlewares': [{
         id: 'koa-bodyparser',
         sort: 1000,
-        options: MAIN.config('koa-bodyparser')
+        options: alaska.main.config('koa-bodyparser')
       }, {
         id: 'alaska-middleware-upload',
         sort: 1000,
-        options: MAIN.config('alaska-middleware-upload')
+        options: alaska.main.config('alaska-middleware-upload')
       }]
     });
   }
 
   async preMount() {
     if (this.config('autoInit')) {
-      let services = Object.keys(this.alaska.services);
+      let services = Object.keys(alaska.services);
       for (let serviceId of services) {
-        let Init = this.alaska.service(serviceId).sleds.Init;
+        let Init = alaska.service(serviceId).sleds.Init;
         if (Init) {
           await Init.run();
         }
@@ -51,7 +51,6 @@ export default class AdminService extends alaska.Service {
    * @returns {Object}
    */
   async settings(user) {
-    let alaska = this.alaska;
     let result = {};
     let services = result.services = {};
     let locales = result.locales = {};
@@ -137,7 +136,6 @@ export default class AdminService extends alaska.Service {
     addAbilities(user.abilities);
 
     if (user.roles) {
-      let Role = this.model('user.Role');
       for (let role of user.roles) {
         if (typeof role == 'string') {
           role = await Role.findCache(role);
@@ -184,3 +182,5 @@ export default class AdminService extends alaska.Service {
     return result;
   }
 }
+
+export default new AdminService();

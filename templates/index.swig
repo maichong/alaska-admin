@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
   <title>{{ t(c('dashboardTitle')) }}</title>
   <script>
     var PREFIX = '{{ prefix }}';
@@ -23,22 +24,22 @@
       background: #eaf0f5;
     }
   </style>
-  <script src="//cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
-  <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
-  <link href="//cdn.bootcss.com/flat-ui/2.2.2/css/flat-ui.css" rel="stylesheet">
-  <link href="//cdn.bootcss.com/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
-  <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+  <script src="{{ prefix }}/static/js/html5shiv.min.js"></script>
+  <link href="{{ prefix }}/static/css/bootstrap.min.css" rel="stylesheet">
+  <link href="{{ prefix }}/static/css/font-awesome.min.css" rel="stylesheet">
+  <link href="{{ prefix }}/static/css/flat-ui.min.css" rel="stylesheet">
+  <link href="{{ prefix }}/static/css/toastr.min.css" rel="stylesheet">
+  <link href="{{ prefix }}/static/css/animate.min.css" rel="stylesheet">
 </head>
 <body>
-<div id="app">
+<div id="viewport">
   <div class="boot-loading">Loading...</div>
 </div>
 
 {% if env=='production' %}
-  <script type="application/javascript" src="static/js/app.min.js"></script>
+  <script type="application/javascript" src="{{ prefix }}/js/app.min.js"></script>
 {% else %}
-  <script type="application/javascript" src="static/js/app.js"></script>
+  <script type="application/javascript" src="{{ prefix }}/js/app.js"></script>
 {% endif %}
 </body>
 </html>

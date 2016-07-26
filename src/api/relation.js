@@ -5,6 +5,8 @@
  */
 
 import _ from 'lodash';
+import alaska from 'alaska';
+
 export default async function (ctx) {
   await ctx.checkAbility('admin');
   let serviceId = ctx.state.service || ctx.query.service;

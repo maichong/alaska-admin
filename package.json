@@ -1,17 +1,17 @@
 {
   "name": "alaska-admin",
-  "version": "0.9.7",
+  "version": "0.10.0",
   "description": "Alaska admin service",
   "keywords": [
     "alaska",
     "alaska-service",
     "admin"
   ],
-  "main": "lib/alaska-admin.js",
+  "main": "index.js",
   "scripts": {
-    "build": "babel ./src --out-dir ./lib",
-    "watch": "babel ./src --out-dir ./lib -w",
-    "prebuild": "rimraf lib",
+    "build": "babel ./src --out-dir ./",
+    "watch": "babel ./src --out-dir ./ -w",
+    "prebuild": "rimraf lib api controllers config locales middlewares models sleds views",
     "prepublish": "npm run build"
   },
   "repository": {
@@ -29,13 +29,14 @@
   },
   "homepage": "https://github.com/maichong/alaska-admin#readme",
   "peerDependencies": {
-    "alaska": "^0.9.18"
+    "alaska": "^0.10.0"
   },
   "dependencies": {
-    "alaska-settings": "^0.9.1",
-    "alaska-field-checkbox": "^0.9.0",
-    "alaska-field-select": "^0.9.1",
-    "alaska-user": "^0.9.4",
+    "alaska-settings": "^0.10.0",
+    "alaska-field-checkbox": "^0.10.0",
+    "alaska-field-select": "^0.10.0",
+    "alaska-field-icon": "^0.10.0",
+    "alaska-user": "^0.10.0",
     "alaska-middleware-upload": "^0.2.0",
     "koa-bodyparser": "^3.0.0"
   }
