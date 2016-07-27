@@ -5,6 +5,7 @@
  */
 
 import alaska from 'alaska';
+import service from '../';
 
 export default async function (ctx) {
   await ctx.checkAbility('admin');

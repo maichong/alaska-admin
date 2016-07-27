@@ -4,7 +4,6 @@
  * @author Liang <liang@maichong.it>
  */
 
-import alaska from 'alaska';
 import service from '../';
 import USER from 'alaska-user';
 import SETTINGS from 'alaska-settings';
