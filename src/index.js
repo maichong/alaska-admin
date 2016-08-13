@@ -82,7 +82,17 @@ class AdminService extends alaska.Service {
           noedit: Model.noedit,
           noremove: Model.noremove,
           groups: Model.groups,
-          relationships: Model.relationships,
+          relationships: _.reduce(Model.relationships, (res, r, key) => {
+            res[key] = {
+              key,
+              path: r.path,
+              title: r.title,
+              filters: r.filters,
+              service: r.ref.service.id,
+              model: r.ref.name
+            };
+            return res;
+          }, {}),
           actions: Model.actions || {},
           fields: {},
           searchFields: Model.searchFields || []
