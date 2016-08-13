@@ -23,7 +23,12 @@ export default async function list(ctx) {
   let ability = `admin.${Model.key}.read`;
   await ctx.checkAbility(ability);
 
-  let filters = Model.createFilters(keyword, ctx.state.filters || ctx.query.filters);
+  let defaultFilters;
+  if (Model.defaultFilters) {
+    defaultFilters = typeof Model.defaultFilters === 'function' ? Model.defaultFilters(ctx) : Model.defaultFilters;
+  }
+
+  let filters = Model.createFilters(keyword, ctx.state.filters || ctx.query.filters || defaultFilters);
 
   let query = Model.paginate({
     page: parseInt(ctx.state.page || ctx.query.page) || 1,
