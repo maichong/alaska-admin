@@ -31,6 +31,7 @@ export default class AdminMenu extends alaska.Model {
       label: 'Type',
       type: 'select',
       default: 'link',
+      switch: true,
       options: [{
         label: '链接',
         value: 'link'

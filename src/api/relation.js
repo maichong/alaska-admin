@@ -45,6 +45,7 @@ export default async function (ctx) {
 
   let results = await query;
 
+  let recordsMap = {};
   let records = _.map(results.results, record => {
     let tmp = {
       value: record.id
@@ -53,6 +54,7 @@ export default async function (ctx) {
     if (value && value === tmp.value) {
       value = '';
     }
+    recordsMap[tmp.value] = true;
     return tmp;
   });
 
@@ -63,6 +65,7 @@ export default async function (ctx) {
       value = [];
     }
     for (let id of value) {
+      if (recordsMap[id]) continue;
       let record = await Model.findCache(id);
       if (record) {
         records.unshift({

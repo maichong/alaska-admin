@@ -12,11 +12,11 @@ import Role from 'alaska-user/models/Role';
  * @class AdminService
  */
 class AdminService extends alaska.Service {
-  constructor(options, alaska) {
+  constructor(options) {
     options = options || {};
     options.dir = options.dir || __dirname;
     options.id = options.id || 'alaska-admin';
-    super(options, alaska);
+    super(options);
   }
 
   postInit() {
@@ -72,6 +72,7 @@ class AdminService extends alaska.Service {
         let model = {
           name: Model.name,
           id: Model.id,
+          path: Model.path,
           key: Model.key,
           label: Model.label,
           title: Model.title,

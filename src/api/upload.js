@@ -34,7 +34,7 @@ export default async function (ctx) {
     if (!FieldType || !FieldType.upload) {
       alaska.error('Invalid field');
     }
-    let img = await FieldType.upload(ctx.files.file, Model.fields[path], Model);
+    let img = await FieldType.upload(ctx.files.file, Model.fields[path]);
     if (ctx.state.editor || ctx.query.editor) {
       ctx.body = {
         success: true,
