@@ -28,7 +28,7 @@ export async function login(ctx) {
     }
   };
   if (access) {
-    settings = await service.settings(user);
+    settings = await service.settings(ctx, user);
   }
   settings.locale = ctx.locale;
   settings.logoReverse = await getLogo('adminLogoReverse');
@@ -71,7 +71,7 @@ export async function info(ctx) {
   let access = await user.hasAbility('admin');
   let settings = {};
   if (access) {
-    settings = await service.settings(user);
+    settings = await service.settings(ctx, user);
   } else {
     settings.locales = {
       'alaska-admin': service.locales

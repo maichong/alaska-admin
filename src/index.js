@@ -7,6 +7,7 @@
 import _ from 'lodash';
 import alaska from 'alaska';
 import Role from 'alaska-user/models/Role';
+import AdminMenu from './models/AdminMenu';
 
 /**
  * @class AdminService
@@ -50,8 +51,10 @@ class AdminService extends alaska.Service {
    * @param {User} user
    * @returns {Object}
    */
-  async settings(user) {
-    let result = {};
+  async settings(ctx, user) {
+    let result = {
+      superMode: ctx.state.superMode
+    };
     let services = result.services = {};
     let locales = result.locales = {};
 
@@ -157,22 +160,24 @@ class AdminService extends alaska.Service {
       }
     }
 
-    let isSuperUser = user.id == this.config(true, 'superUser');
-
-    let AdminMenu = this.model('AdminMenu');
     let menu = [];
-    let menuMap = _.reduce(await AdminMenu.find({ activated: true }).sort('-sort'), (res, item) => {
+    let menuMap = _.reduce(await AdminMenu.find().sort('-sort'), (res, item) => {
       item = item.data();
-      if (!item.ability || abilities[item.ability] || isSuperUser) {
+      if (item.activated && (!item.ability || abilities[item.ability] || result.superMode)) {
         delete item.ability;
-        res[item.id] = item;
         menu.push(item);
+        if (!result.superMode && item.super) {
+          item.hidden = true;
+        }
+      } else {
+        item.hidden = true;
       }
+      res[item.id] = item;
       return res;
     }, {});
 
     _.each(menuMap, item => {
-      if (item.parent && menuMap[item.parent]) {
+      if (!item.hidden && item.parent && menuMap[item.parent]) {
         if (!menuMap[item.parent].subs) {
           menuMap[item.parent].subs = [];
         }
@@ -181,12 +186,12 @@ class AdminService extends alaska.Service {
       }
     });
 
-    result.menu = _.filter(menu, item => !item.isSub);
+    result.menu = _.filter(menu, item => !item.isSub && !item.hidden);
 
     for (let serviceId in alaska.services) {
       let service = alaska.services[serviceId];
       if (service != this && service.settings) {
-        await service.settings(user, result);
+        await service.settings(ctx, user, result);
       }
     }
 

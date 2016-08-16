@@ -11,9 +11,17 @@ export default class AdminMenu extends alaska.Model {
   static label = 'Admin Menu';
   static icon = 'bars';
   static title = 'label';
-  static defaultColumns = 'icon label type parent sort service link ability activated';
+  static defaultColumns = 'icon label type parent sort service link ability super activated';
   static defaultSort = '-sort';
   static searchFields = 'label link parent';
+
+  static defaultFilters = ctx => {
+    if (!ctx.state.superMode) {
+      return {
+        super: { $ne: true }
+      };
+    }
+  };
 
   static fields = {
     _id: String,
@@ -69,6 +77,11 @@ export default class AdminMenu extends alaska.Model {
       label: 'Sort',
       type: Number,
       default: 0
+    },
+    super: {
+      label: 'Super',
+      type: Boolean,
+      super: true
     },
     activated: {
       label: 'Activated',

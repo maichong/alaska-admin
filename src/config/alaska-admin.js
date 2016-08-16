@@ -19,6 +19,7 @@ export default {
     'alaska-user': {},
     'alaska-settings': {}
   },
+  superMode: false,
   /**
    * run Init sled when every launch
    */
