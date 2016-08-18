@@ -1,6 +1,6 @@
 {
   "name": "alaska-admin",
-  "version": "0.10.5",
+  "version": "0.10.6",
   "description": "Alaska admin service",
   "keywords": [
     "alaska",
@@ -35,6 +35,7 @@
     "alaska-settings": "^0.10.1",
     "alaska-field-checkbox": "^0.10.2",
     "alaska-field-select": "^0.10.2",
+    "alaska-field-category": "^0.10.2",
     "alaska-field-icon": "^0.10.1",
     "alaska-user": "^0.10.3",
     "alaska-middleware-upload": "^0.2.0",

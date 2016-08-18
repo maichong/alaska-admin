@@ -63,7 +63,7 @@ export default class AdminMenu extends alaska.Model {
     },
     parent: {
       label: 'Parent Menu',
-      type: 'relationship',
+      type: 'category',
       ref: 'AdminMenu',
       filters: {
         type: 'group'

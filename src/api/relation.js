@@ -15,6 +15,9 @@ export default async function (ctx) {
   let value = ctx.state.value || ctx.query.value || '';
   let page = parseInt(ctx.state.page || ctx.query.page) || 1;
   let perPage = parseInt(ctx.state.perPage || ctx.query.perPage) || 100;
+  if (ctx.state.all || ctx.query.all) {
+    perPage = 10000;
+  }
 
   if (!serviceId || !modelName) {
     alaska.error('Invalid parameters');
@@ -36,7 +39,7 @@ export default async function (ctx) {
     page,
     perPage,
     filters
-  }).select(titleField);
+  }).select(titleField + ' parent');
 
   let sort = ctx.state.sort || ctx.query.sort || Model.defaultSort;
   if (sort) {
@@ -54,6 +57,9 @@ export default async function (ctx) {
     if (value && value === tmp.value) {
       value = '';
     }
+    if (record.parent) {
+      tmp.parent = record.parent;
+    }
     recordsMap[tmp.value] = true;
     return tmp;
   });
@@ -68,10 +74,14 @@ export default async function (ctx) {
       if (recordsMap[id]) continue;
       let record = await Model.findCache(id);
       if (record) {
-        records.unshift({
+        let tmp = {
           value: record.id,
           label: record[titleField] || id
-        });
+        };
+        if (record.parent) {
+          tmp.parent = record.parent;
+        }
+        records.unshift(tmp);
       }
     }
   }
