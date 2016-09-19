@@ -8,6 +8,7 @@ import _ from 'lodash';
 import alaska from 'alaska';
 import Role from 'alaska-user/models/Role';
 import AdminMenu from './models/AdminMenu';
+import mongoose from 'mongoose';
 
 /**
  * @class AdminService
@@ -119,13 +120,30 @@ class AdminService extends alaska.Service {
           if (options.label == '_ID') {
             options.label = 'ID';
           }
+          options.plain = '';
+          if (field.type.plain === String) {
+            options.plain = 'string';
+          } else if (field.type.plain === Date) {
+            options.plain = 'date';
+          } else if (field.type.plain === Number) {
+            options.plain = 'number';
+          } else if (field.type.plain === Boolean) {
+            options.plain = 'bool';
+          } else if (field.type.plain === mongoose.Schema.Types.ObjectId) {
+            options.plain = 'id';
+          } else if (field.type.plain === mongoose.Schema.Types.Mixed) {
+            options.plain = 'object';
+          } else {
+            options.plain = '';
+          }
           model.fields[path] = options;
         }
         if (!model.fields._id) {
           model.fields._id = {
             label: 'ID',
             path: '_id',
-            cell: 'TextFieldCell'
+            cell: 'TextFieldCell',
+            plain: 'id'
           };
         }
         settings.models[Model.name] = model;
